@@ -1,0 +1,15 @@
+C:\Users\Celso\Documents\Aval03\bin\Debug\net8.0\Aval03.exe
+C:\Users\Celso\Documents\Aval03\bin\Debug\net8.0\Aval03.dll
+C:\Users\Celso\Documents\Aval03\bin\Debug\net8.0\Aval03.deps.json
+C:\Users\Celso\Documents\Aval03\bin\Debug\net8.0\Aval03.runtimeconfig.json
+C:\Users\Celso\Documents\Aval03\bin\Debug\net8.0\Aval03.pdb
+C:\Users\Celso\Documents\Aval03\obj\Debug\net8.0\Aval03.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Celso\Documents\Aval03\obj\Debug\net8.0\Aval03.AssemblyInfoInputs.cache
+C:\Users\Celso\Documents\Aval03\obj\Debug\net8.0\Aval03.AssemblyInfo.cs
+C:\Users\Celso\Documents\Aval03\obj\Debug\net8.0\Aval03.csproj.CoreCompileInputs.cache
+C:\Users\Celso\Documents\Aval03\obj\Debug\net8.0\Aval03.sourcelink.json
+C:\Users\Celso\Documents\Aval03\obj\Debug\net8.0\Aval03.dll
+C:\Users\Celso\Documents\Aval03\obj\Debug\net8.0\refint\Aval03.dll
+C:\Users\Celso\Documents\Aval03\obj\Debug\net8.0\Aval03.pdb
+C:\Users\Celso\Documents\Aval03\obj\Debug\net8.0\Aval03.genruntimeconfig.cache
+C:\Users\Celso\Documents\Aval03\obj\Debug\net8.0\ref\Aval03.dll
