@@ -1,28 +1,33 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
-using System.Text;
 
 class Program
-{//taina carvalho sistemas 2 fase
+{
     static void Main()
     {
-        //Victor Rafael da Silva
         string textoCifrado = File.ReadAllText("provinhaBarbadinha.txt");
         string textoDecifrado = decifrar(textoCifrado);
         textoDecifrado = textoDecifrado.Replace("@", "\n");
 
-       Console.WriteLine("palavras repetem");
         string[] palindromos = palindromo(textoDecifrado);
 
-      foreach (var p in palindromos)
+        Console.WriteLine("Palíndromos encontrados: ");
+        foreach (var p in palindromos)
         {
             if (p.Length > 2)
-            Console.WriteLine(p);
+                Console.WriteLine(p);
         }
 
         textoDecifrado = SubstituirPalindromos(textoDecifrado, palindromos);
         Console.WriteLine("\nTexto decifrado em maiúsculas: \n" + textoDecifrado.ToUpper());
+
+        // Contagem de caracteres e palavras
+        int numeroCaracteres = textoDecifrado.Length;
+        int numeroPalavras = textoDecifrado.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length;
+
+        Console.WriteLine("\nNúmero de caracteres da mensagem decifrada: " + numeroCaracteres);
+        Console.WriteLine("\nQuantidade de palavras no texto decifrado: " + numeroPalavras);
     }
 
     static string decifrar(string textoCifrado)
@@ -35,6 +40,7 @@ class Program
         }
         return new string(caracteresCifrados);
     }
+
     static string[] palindromo(string texto)
     {
         return texto.Split(' ', StringSplitOptions.RemoveEmptyEntries)
@@ -46,6 +52,7 @@ class Program
             })
             .ToArray();
     }
+
     static string SubstituirPalindromos(string texto, string[] palindromos)
     {
         foreach (var palavra in palindromos)
@@ -64,7 +71,7 @@ class Program
                     case "osso":
                         substituicao = "passam";
                         break;
-                    // Add more cases for other palindromes if needed
+                    // Adicione mais casos para outros palíndromos, se necessário
                 }
 
                 texto = texto.Replace(palavra, substituicao);
