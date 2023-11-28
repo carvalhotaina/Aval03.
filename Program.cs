@@ -1,71 +1,76 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
+using System.Text;
 
 class Program
-{
+{//taina carvalho sistemas 2 fase
     static void Main()
     {
-        //taina carvalho 2 semetre sistemas
-        string textoCifrado = "Lu0s z q0tm0uƒ€q~x ƒ40t ‚uy~t (~ 0†w|q~„mPe}q(†ytq(q‚q‚i0…}0uy~…„w0y‚‚m|u†qv„uPeu0q„qy…u0tm0 † (u}0†é‚yqƒ(s ‚u{0u0„i}q~xwƒPTqvt 0ri|qƒ0m0sywi‚‚ ƒ(u0sqz ~qƒ(q0uƒ|‚q~xwƒPSqz‚ ƒ0wƒƒ 0lyŠu~l 0ƒyuP_0ƒq~q|0o‚y„qvt 0~ë PTu~u0ƒuz0yƒƒw0 …u(sxq}i}0tu(‚uƒƒ}‚uy÷ë PPSi€y„qt0Y~ykyq|PZuƒƒ…z‚uy÷ë ";
+        //Victor Rafael da Silva
+        string textoCifrado = File.ReadAllText("provinhaBarbadinha.txt");
+        string textoDecifrado = decifrar(textoCifrado);
+        textoDecifrado = textoDecifrado.Replace("@", "\n");
 
-        string textoDecifrado = DecifrarDeTeusPulos(textoCifrado);
+       Console.WriteLine("palavras repetem");
+        string[] palindromos = palindromo(textoDecifrado);
 
-        textoDecifrado = textoDecifrado.Replace('@', '\n');
-
-        string[] palindromos = { "deed", "level", "civic" }; 
-        for (int i = 0; i < palindromos.Length; i++)
+      foreach (var p in palindromos)
         {
-            textoDecifrado = SubstituirPalindromo(textoDecifrado, palindromos[i], new[] { "gloriosa", "bondade", "passam" }[i]);
+            if (p.Length > 2)
+            Console.WriteLine(p);
         }
 
-        Console.WriteLine("Conteúdo do texto cifrado:");
-        Console.WriteLine(textoCifrado);
-
-        Console.WriteLine("\nPalíndromos encontrados:");
-        foreach (var palindromo in palindromos)
-        {
-            Console.WriteLine(palindromo);
-        }
-
-        Console.WriteLine("\nNúmero de caracteres do texto decifrado:");
-        Console.WriteLine(textoDecifrado.Length);
-
-        Console.WriteLine("\nNúmero de palavras do texto decifrado:");
-        Console.WriteLine(ContarPalavras(textoDecifrado));
-
-        // Exibe o texto decifrado em maiúsculo
-        Console.WriteLine("\nTexto decifrado em maiúsculo:");
-        Console.WriteLine(textoDecifrado.ToUpper());
+        textoDecifrado = SubstituirPalindromos(textoDecifrado, palindromos);
+        Console.WriteLine("\nTexto decifrado em maiúsculas: \n" + textoDecifrado.ToUpper());
     }
 
-    static string DecifrarDeTeusPulos(string textoCifrado)
+    static string decifrar(string textoCifrado)
     {
         char[] caracteresCifrados = textoCifrado.ToCharArray();
-        char[] caracteresDecifrados = new char[caracteresCifrados.Length];
-
         for (int i = 0; i < caracteresCifrados.Length; i++)
         {
-            if (i % 5 == 0)
+            int chave = (i % 5 == 0) ? 8 : 16;
+            caracteresCifrados[i] = (char)(caracteresCifrados[i] - chave);
+        }
+        return new string(caracteresCifrados);
+    }
+    static string[] palindromo(string texto)
+    {
+        return texto.Split(' ', StringSplitOptions.RemoveEmptyEntries)
+            .Where(palavra =>
             {
-                caracteresDecifrados[i] = (char)(caracteresCifrados[i] - 8);
-            }
-            else
+                char[] caracteres = palavra.ToCharArray();
+                Array.Reverse(caracteres);
+                return palavra.Equals(new string(caracteres), StringComparison.OrdinalIgnoreCase);
+            })
+            .ToArray();
+    }
+    static string SubstituirPalindromos(string texto, string[] palindromos)
+    {
+        foreach (var palavra in palindromos)
+        {
+            if (palavra.Length > 2)
             {
-                caracteresDecifrados[i] = (char)(caracteresCifrados[i] - 16);
+                string substituicao = "";
+                switch (palavra.ToLower())
+                {
+                    case "arara":
+                        substituicao = "gloriosa";
+                        break;
+                    case "ovo":
+                        substituicao = "bondade";
+                        break;
+                    case "osso":
+                        substituicao = "passam";
+                        break;
+                    // Add more cases for other palindromes if needed
+                }
+
+                texto = texto.Replace(palavra, substituicao);
             }
         }
 
-        return new string(caracteresDecifrados);
-    }
-
-    static string SubstituirPalindromo(string texto, string palindromo, string substituicao)
-    {
-        return texto.Replace(palindromo, substituicao);
-    }
-
-    static int ContarPalavras(string texto)
-    {
-        string[] palavras = texto.Split(new[] { ' ', '\t', '\n', '\r', '\f' }, StringSplitOptions.RemoveEmptyEntries);
-
-        return palavras.Length;
+        return texto;
     }
 }
